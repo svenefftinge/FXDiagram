@@ -2,13 +2,13 @@ package de.fxdiagram.core;
 
 import de.fxdiagram.core.XActivatable;
 import de.fxdiagram.core.XDiagram;
+import de.fxdiagram.core.extensions.ForeachExtensions;
 import java.util.List;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ListChangeListener.Change;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.Node;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
@@ -40,7 +40,7 @@ public class XDiagramChildrenListener<T extends Node & XActivatable> implements 
               }
             }
           };
-          IterableExtensions.forEach(_addedSubList, _function);
+          ForeachExtensions.forEachExt(_addedSubList, _function);
         }
         boolean _wasRemoved = change.wasRemoved();
         if (_wasRemoved) {
@@ -51,7 +51,7 @@ public class XDiagramChildrenListener<T extends Node & XActivatable> implements 
               _children.remove(it);
             }
           };
-          IterableExtensions.forEach(_removed, _function_1);
+          ForeachExtensions.forEachExt(_removed, _function_1);
         }
       }
       boolean _next_1 = change.next();

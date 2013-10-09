@@ -13,6 +13,7 @@ import de.fxdiagram.core.anchors.ArrowHead;
 import de.fxdiagram.core.behavior.MoveBehavior;
 import de.fxdiagram.core.extensions.BoundsExtensions;
 import de.fxdiagram.core.extensions.CoreExtensions;
+import de.fxdiagram.core.extensions.ForeachExtensions;
 import java.util.ArrayList;
 import java.util.Collections;
 import javafx.beans.property.DoubleProperty;
@@ -398,7 +399,7 @@ public class ConnectionRouter implements XActivatable {
           it.update(_controlPoints);
         }
       };
-      IterableExtensions.<XControlPoint>forEach(_controlPoints_6, _function_4);
+      ForeachExtensions.<XControlPoint>forEachExt(_controlPoints_6, _function_4);
     }
   }
   

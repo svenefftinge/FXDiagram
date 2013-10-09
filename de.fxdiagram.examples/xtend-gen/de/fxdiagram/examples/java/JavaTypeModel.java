@@ -2,6 +2,7 @@ package de.fxdiagram.examples.java;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.HashMultimap;
+import de.fxdiagram.core.extensions.ForeachExtensions;
 import de.fxdiagram.examples.java.Property;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
@@ -102,7 +103,7 @@ public class JavaTypeModel {
         }
       }
     };
-    IterableExtensions.<Method>forEach(_filter_2, _function_3);
+    ForeachExtensions.<Method>forEachExt(_filter_2, _function_3);
     Set<String> _keySet = propertyMethods.keySet();
     for (final String propertyName : _keySet) {
       {

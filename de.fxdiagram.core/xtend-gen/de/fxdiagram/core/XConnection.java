@@ -16,6 +16,7 @@ import de.fxdiagram.core.anchors.TriangleArrowHead;
 import de.fxdiagram.core.behavior.MoveBehavior;
 import de.fxdiagram.core.extensions.BezierExtensions;
 import de.fxdiagram.core.extensions.CoreExtensions;
+import de.fxdiagram.core.extensions.ForeachExtensions;
 import de.fxdiagram.core.extensions.Point2DExtensions;
 import java.util.Collections;
 import java.util.List;
@@ -149,7 +150,7 @@ public class XConnection extends XShape {
               _layoutYProperty.addListener(XConnection.this.controlPointListener);
             }
           };
-          IterableExtensions.forEach(_addedSubList, _function);
+          ForeachExtensions.forEachExt(_addedSubList, _function);
           boolean _next_1 = it.next();
           _while = _next_1;
         }
@@ -162,7 +163,7 @@ public class XConnection extends XShape {
             _layoutYProperty.removeListener(XConnection.this.controlPointListener);
           }
         };
-        IterableExtensions.forEach(_removed, _function);
+        ForeachExtensions.forEachExt(_removed, _function);
       }
     };
     final Procedure1<Change<? extends XControlPoint>> listChangeListener = _function_1;
@@ -454,7 +455,7 @@ public class XConnection extends XShape {
         it.setStrokeWidth(strokeInRoot);
       }
     };
-    IterableExtensions.forEach(shapes, _function);
+    ForeachExtensions.forEachExt(shapes, _function);
   }
   
   public boolean isSelectable() {

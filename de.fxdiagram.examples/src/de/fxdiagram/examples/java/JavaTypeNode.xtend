@@ -7,6 +7,7 @@ import de.fxdiagram.core.XRapidButton
 import de.fxdiagram.core.anchors.LineArrowHead
 import de.fxdiagram.core.anchors.TriangleArrowHead
 import de.fxdiagram.core.behavior.AbstractBehavior
+import de.fxdiagram.core.services.ImageCache
 import de.fxdiagram.lib.anchors.RoundedRectangleAnchors
 import de.fxdiagram.lib.nodes.RectangleBorderPane
 import de.fxdiagram.lib.tools.CarusselChooser
@@ -22,7 +23,7 @@ import javafx.scene.text.FontWeight
 import javafx.scene.text.Text
 
 import static extension de.fxdiagram.core.extensions.CoreExtensions.*
-import de.fxdiagram.core.services.ImageCache
+import static extension de.fxdiagram.core.extensions.ForeachExtensions.*
 
 class JavaTypeNode extends XNode {
 	
@@ -69,19 +70,19 @@ class JavaTypeNode extends XNode {
 		propertyCompartment.children.clear
 		operationCompartment.children.clear
 		if(isActive) {
-			model.properties.limit.forEach [
+			model.properties.limit.forEachExt [
 				property |
 				propertyCompartment.children += new Text => [
 					text = '''«property.name»: «property.type.simpleName»''' 
 				]
 			]
-			model.constructors.forEach [
+			model.constructors.forEachExt [
 				constructor |
 				operationCompartment.children += new Text => [
 					text = '''«javaType.simpleName»(«constructor.parameterTypes.map[simpleName].join(', ')»)''' 
 				]
 			]
-			model.operations.limit.forEach [
+			model.operations.limit.forEachExt [
 				method |
 				operationCompartment.children += new Text => [
 					text = '''«method.name»(«method.parameterTypes.map[simpleName].join(', ')»): «method.returnType.simpleName»''' 

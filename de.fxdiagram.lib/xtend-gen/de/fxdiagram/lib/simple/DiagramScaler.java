@@ -4,6 +4,7 @@ import de.fxdiagram.core.XActivatable;
 import de.fxdiagram.core.XDiagram;
 import de.fxdiagram.core.XNode;
 import de.fxdiagram.core.extensions.BoundsExtensions;
+import de.fxdiagram.core.extensions.ForeachExtensions;
 import java.util.List;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ReadOnlyBooleanProperty;
@@ -81,7 +82,7 @@ public class DiagramScaler implements XActivatable {
                   _layoutYProperty.addListener(DiagramScaler.this.layoutListener);
                 }
               };
-              IterableExtensions.forEach(_addedSubList, _function);
+              ForeachExtensions.forEachExt(_addedSubList, _function);
             }
             boolean _wasRemoved = change.wasRemoved();
             if (_wasRemoved) {
@@ -96,7 +97,7 @@ public class DiagramScaler implements XActivatable {
                   _layoutYProperty.removeListener(DiagramScaler.this.layoutListener);
                 }
               };
-              IterableExtensions.forEach(_removed, _function_1);
+              ForeachExtensions.forEachExt(_removed, _function_1);
             }
           }
           boolean _next_1 = change.next();
@@ -231,7 +232,7 @@ public class DiagramScaler implements XActivatable {
           _layoutYProperty.addListener(DiagramScaler.this.layoutListener);
         }
       };
-      IterableExtensions.<XNode>forEach(_nodes, _function);
+      ForeachExtensions.<XNode>forEachExt(_nodes, _function);
       ObservableList<XNode> _nodes_1 = this.diagram.getNodes();
       _nodes_1.addListener(this.listChangeListener);
       Group _buttonLayer = this.diagram.getButtonLayer();
@@ -264,7 +265,7 @@ public class DiagramScaler implements XActivatable {
           _layoutYProperty.removeListener(DiagramScaler.this.layoutListener);
         }
       };
-      IterableExtensions.<XNode>forEach(_nodes_1, _function);
+      ForeachExtensions.<XNode>forEachExt(_nodes_1, _function);
     }
     this.isActiveProperty.set(false);
   }

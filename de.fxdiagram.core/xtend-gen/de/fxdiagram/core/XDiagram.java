@@ -12,6 +12,7 @@ import de.fxdiagram.core.XShape;
 import de.fxdiagram.core.anchors.ArrowHead;
 import de.fxdiagram.core.auxlines.AuxiliaryLinesSupport;
 import de.fxdiagram.core.extensions.CoreExtensions;
+import de.fxdiagram.core.extensions.ForeachExtensions;
 import java.util.List;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;
@@ -33,7 +34,6 @@ import javafx.scene.Parent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
@@ -146,7 +146,7 @@ public class XDiagram extends Group implements XActivatable {
                   XDiagram.this.addConnectionDecoration(_sourceArrowHeadProperty, labelListener);
                 }
               };
-              IterableExtensions.<XConnection>forEach(addedConnections, _function);
+              ForeachExtensions.<XConnection>forEachExt(addedConnections, _function);
             }
             boolean _wasRemoved = change.wasRemoved();
             if (_wasRemoved) {
@@ -162,7 +162,7 @@ public class XDiagram extends Group implements XActivatable {
                   XDiagram.this.removeConnectionDecoration(_sourceArrowHeadProperty, labelListener);
                 }
               };
-              IterableExtensions.<XConnection>forEach(removedConnections, _function_1);
+              ForeachExtensions.<XConnection>forEachExt(removedConnections, _function_1);
             }
           }
           boolean _next_1 = change.next();
@@ -174,8 +174,8 @@ public class XDiagram extends Group implements XActivatable {
     Group _connectionLayer_1 = this.getConnectionLayer();
     ObservableList<Node> _children = _connectionLayer_1.getChildren();
     _children.addListener(new ListChangeListener<Node>() {
-        public void onChanged(Change<? extends Node> arg0) {
-          listChangeListener.apply(arg0);
+        public void onChanged(Change<? extends Node> c) {
+          listChangeListener.apply(c);
         }
     });
     ObservableList<XNode> _nodes_1 = this.getNodes();
@@ -188,7 +188,7 @@ public class XDiagram extends Group implements XActivatable {
         ((XActivatable)it).activate();
       }
     };
-    IterableExtensions.<Parent>forEach(_plus_1, _function_2);
+    ForeachExtensions.<Parent>forEachExt(_plus_1, _function_2);
     AuxiliaryLinesSupport _auxiliaryLinesSupport = new AuxiliaryLinesSupport(this);
     this.auxiliaryLinesSupport = _auxiliaryLinesSupport;
     if (this.contentsInitializer!=null) {
@@ -197,13 +197,22 @@ public class XDiagram extends Group implements XActivatable {
   }
   
   protected void addConnectionDecoration(final Property<? extends Node> property, final ChangeListener<? super Node> listener) {
+    boolean _and = false;
     Node _value = property.getValue();
     boolean _notEquals = (!Objects.equal(_value, null));
-    if (_notEquals) {
+    if (!_notEquals) {
+      _and = false;
+    } else {
+      Node _value_1 = property.getValue();
+      Parent _parent = _value_1.getParent();
+      boolean _notEquals_1 = (!Objects.equal(_parent, null));
+      _and = (_notEquals && _notEquals_1);
+    }
+    if (_and) {
       Group _connectionLayer = this.getConnectionLayer();
       ObservableList<Node> _children = _connectionLayer.getChildren();
-      Node _value_1 = property.getValue();
-      _children.add(_value_1);
+      Node _value_2 = property.getValue();
+      _children.add(_value_2);
     }
     property.addListener(listener);
   }

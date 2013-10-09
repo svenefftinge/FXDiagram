@@ -10,6 +10,7 @@ import javafx.scene.input.MouseButton
 import javafx.scene.input.MouseEvent
 
 import static extension de.fxdiagram.core.extensions.CoreExtensions.*
+import static extension de.fxdiagram.core.extensions.ForeachExtensions.*
 
 class SelectionTool implements XDiagramTool {
 
@@ -41,7 +42,7 @@ class SelectionTool implements XDiagramTool {
 					else 
 						targetShape.select(event)
 						
-					selection.forEach [
+					selection.forEachExt [
 						moveBehavior?.mousePressed(event)
 					]
 					targetShape.moveBehavior?.mousePressed(event)

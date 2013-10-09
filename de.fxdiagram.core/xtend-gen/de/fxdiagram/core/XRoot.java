@@ -8,6 +8,7 @@ import de.fxdiagram.core.XDiagram;
 import de.fxdiagram.core.XShape;
 import de.fxdiagram.core.css.JavaToCss;
 import de.fxdiagram.core.extensions.BoundsExtensions;
+import de.fxdiagram.core.extensions.ForeachExtensions;
 import de.fxdiagram.core.extensions.NumberExpressionExtensions;
 import de.fxdiagram.core.extensions.TransformExtensions;
 import de.fxdiagram.core.extensions.UriExtensions;
@@ -128,7 +129,7 @@ public class XRoot extends Parent implements XActivatable {
             TransformExtensions.leftMultiply(XRoot.this.diagramTransform, it);
           }
         };
-        IterableExtensions.<Transform>forEach(_transforms_1, _function);
+        ForeachExtensions.<Transform>forEachExt(_transforms_1, _function);
         double _mxx = this.diagramTransform.getMxx();
         double _mxx_1 = this.diagramTransform.getMxx();
         double _multiply = (_mxx * _mxx_1);

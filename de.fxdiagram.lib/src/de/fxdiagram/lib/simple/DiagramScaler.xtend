@@ -1,6 +1,7 @@
 package de.fxdiagram.lib.simple
 
 import de.fxdiagram.annotations.properties.FxProperty
+import de.fxdiagram.annotations.properties.ReadOnly
 import de.fxdiagram.core.XActivatable
 import de.fxdiagram.core.XDiagram
 import de.fxdiagram.core.XNode
@@ -12,7 +13,7 @@ import javafx.scene.shape.Rectangle
 import static java.lang.Math.*
 
 import static extension de.fxdiagram.core.extensions.BoundsExtensions.*
-import de.fxdiagram.annotations.properties.ReadOnly
+import static extension de.fxdiagram.core.extensions.ForeachExtensions.*
 
 class DiagramScaler implements XActivatable {
 
@@ -38,13 +39,13 @@ class DiagramScaler implements XActivatable {
 		listChangeListener = [ ListChangeListener.Change<? extends XNode> change |
 			while (change.next) {
 				if (change.wasAdded)
-					change.addedSubList.forEach [
+					change.addedSubList.forEachExt [
 						boundsInLocalProperty.addListener(boundsInLocalListener)
 						layoutXProperty.addListener(layoutListener)
 						layoutYProperty.addListener(layoutListener)
 					]
 				if (change.wasRemoved)
-					change.removed.forEach [
+					change.removed.forEachExt [
 						boundsInLocalProperty.removeListener(boundsInLocalListener)
 						layoutXProperty.removeListener(layoutListener)
 						layoutYProperty.removeListener(layoutListener)
@@ -111,7 +112,7 @@ class DiagramScaler implements XActivatable {
 
 	override activate() {
 		if(!isActive) {
-			diagram.nodes.forEach [
+			diagram.nodes.forEachExt [
 				boundsInLocalProperty.addListener(boundsInLocalListener)
 				layoutXProperty.addListener(layoutListener)
 				layoutYProperty.addListener(layoutListener)
@@ -130,7 +131,7 @@ class DiagramScaler implements XActivatable {
 			diagram.scaleY = 1
 			diagram.buttonLayer.layoutBoundsProperty.removeListener(boundsInLocalListener)
 			diagram.nodes.removeListener(listChangeListener)
-			diagram.nodes.forEach [
+			diagram.nodes.forEachExt [
 				boundsInLocalProperty.removeListener(boundsInLocalListener)
 				layoutXProperty.removeListener(layoutListener)
 				layoutYProperty.removeListener(layoutListener)

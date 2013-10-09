@@ -5,13 +5,13 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import de.fxdiagram.core.XNode;
 import de.fxdiagram.core.auxlines.AuxiliaryLine;
+import de.fxdiagram.core.extensions.ForeachExtensions;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
@@ -48,7 +48,7 @@ public class AuxiliaryLineMap<T extends Object> {
           AuxiliaryLineMap.this.removeByNode(it);
         }
       };
-      IterableExtensions.<XNode>forEach(((Iterable<XNode>)Conversions.doWrapArray(_relatedNodes)), _function);
+      ForeachExtensions.<XNode>forEachExt(((Iterable<XNode>)Conversions.doWrapArray(_relatedNodes)), _function);
     }
     double _position = line.getPosition();
     int _key = this.getKey(_position);
@@ -60,7 +60,7 @@ public class AuxiliaryLineMap<T extends Object> {
           AuxiliaryLineMap.this.node2entry.put(it, line);
         }
       };
-      IterableExtensions.<XNode>forEach(((Iterable<XNode>)Conversions.doWrapArray(_relatedNodes_1)), _function_1);
+      ForeachExtensions.<XNode>forEachExt(((Iterable<XNode>)Conversions.doWrapArray(_relatedNodes_1)), _function_1);
     }
   }
   

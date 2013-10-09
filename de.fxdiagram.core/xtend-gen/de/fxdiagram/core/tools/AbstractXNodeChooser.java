@@ -8,6 +8,7 @@ import de.fxdiagram.core.XDiagram;
 import de.fxdiagram.core.XNode;
 import de.fxdiagram.core.XRoot;
 import de.fxdiagram.core.extensions.CoreExtensions;
+import de.fxdiagram.core.extensions.ForeachExtensions;
 import de.fxdiagram.core.extensions.StringExpressionExtensions;
 import de.fxdiagram.core.tools.XDiagramTool;
 import de.fxdiagram.core.tools.XNodeChooserTransition;
@@ -34,7 +35,6 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.geometry.Bounds;
@@ -147,8 +147,8 @@ public abstract class AbstractXNodeChooser implements XDiagramTool {
     final EventHandler<SwipeEvent> _function_1 = new EventHandler<SwipeEvent>() {
       public void handle(final SwipeEvent it) {
         int _switchResult = (int) 0;
-        EventType<? extends Event> _eventType = it.getEventType();
-        final EventType<? extends Event> getEventType = _eventType;
+        EventType<SwipeEvent> _eventType = it.getEventType();
+        final EventType<SwipeEvent> getEventType = _eventType;
         boolean _matched = false;
         if (!_matched) {
           if (Objects.equal(getEventType,SwipeEvent.SWIPE_DOWN)) {
@@ -175,7 +175,7 @@ public abstract class AbstractXNodeChooser implements XDiagramTool {
     this.swipeHandler = _function_1;
     final EventHandler<ScrollEvent> _function_2 = new EventHandler<ScrollEvent>() {
       public void handle(final ScrollEvent it) {
-        EventType<? extends Event> _eventType = it.getEventType();
+        EventType<ScrollEvent> _eventType = it.getEventType();
         boolean _equals = Objects.equal(_eventType, ScrollEvent.SCROLL_FINISHED);
         if (_equals) {
           double _currentPosition = AbstractXNodeChooser.this.getCurrentPosition();
@@ -502,7 +502,7 @@ public abstract class AbstractXNodeChooser implements XDiagramTool {
           node.setOnMouseClicked(_function);
         }
       };
-      IterableExtensions.<XNode>forEach(_nodes_4, _function_2);
+      ForeachExtensions.<XNode>forEachExt(_nodes_4, _function_2);
       XDiagram _diagram_3 = this.diagram();
       Scene _scene = _diagram_3.getScene();
       _scene.<SwipeEvent>addEventHandler(SwipeEvent.ANY, this.swipeHandler);
@@ -591,7 +591,7 @@ public abstract class AbstractXNodeChooser implements XDiagramTool {
             it.setOnMouseClicked(null);
           }
         };
-        IterableExtensions.<XNode>forEach(_nodes, _function);
+        ForeachExtensions.<XNode>forEachExt(_nodes, _function);
         ObservableList<Node> _children = this.group.getChildren();
         _children.remove(choice);
         XDiagram _diagram = this.diagram();

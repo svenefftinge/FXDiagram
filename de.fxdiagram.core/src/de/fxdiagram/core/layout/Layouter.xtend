@@ -23,6 +23,8 @@ import javafx.util.Duration
 import static de.fxdiagram.core.XConnectionKind.*
 import static java.lang.Math.*
 
+import static extension de.fxdiagram.core.extensions.ForeachExtensions.*
+
 class Layouter { 
 
 	extension KLayoutDataFactory = KLayoutDataFactory.eINSTANCE
@@ -105,7 +107,7 @@ class Layouter {
 				}
 			}
 		}
-		animations.forEach[play]
+		animations.forEachExt[play]
 	}
 	
 	protected def toKRootNode(XDiagram it, Map<Object, KGraphElement> cache) {
@@ -116,10 +118,10 @@ class Layouter {
 //		shapeLayout.setProperty(LayoutOptions.DEBUG_MODE, true)
 		kRoot.data += shapeLayout
 		cache.put(it, kRoot)
-		nodes.forEach [
+		nodes.forEachExt [
 			kRoot.children += toKNode(cache)
 		]
-		connections.forEach [
+		connections.forEachExt [
 			toKEdge(cache)
 		]
 		kRoot

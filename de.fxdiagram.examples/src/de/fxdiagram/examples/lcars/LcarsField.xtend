@@ -19,6 +19,7 @@ import javafx.scene.layout.FlowPane
 import javafx.scene.text.Text
 
 import static extension de.fxdiagram.core.extensions.CoreExtensions.*
+import static extension de.fxdiagram.core.extensions.ForeachExtensions.*
 import static extension de.fxdiagram.examples.lcars.LcarsExtensions.*
 import static extension javafx.util.Duration.*
 
@@ -63,7 +64,7 @@ class LcarsField extends Parent {
 				]
 			}
 			onMousePressed = [
-				allTextNodes.forEach[fill = RED]
+				allTextNodes.forEachExt[fill = RED]
 				if(button != MouseButton.PRIMARY) {
 					val Service<Void> service = [|
 						new LcarsQueryTask(this, name, value, connectionFactory)
@@ -120,7 +121,7 @@ class LcarsField extends Parent {
 	
 	def resetColors() {
 		allTextNodes.head.fill = FLESH
-		allTextNodes.tail.forEach[fill = ORANGE]
+		allTextNodes.tail.forEachExt[fill = ORANGE]
 	}
 }
 

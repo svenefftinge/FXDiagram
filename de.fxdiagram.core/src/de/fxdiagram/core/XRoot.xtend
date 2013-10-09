@@ -25,6 +25,7 @@ import static java.lang.Math.*
 
 import static extension de.fxdiagram.core.css.JavaToCss.*
 import static extension de.fxdiagram.core.extensions.BoundsExtensions.*
+import static extension de.fxdiagram.core.extensions.ForeachExtensions.*
 import static extension de.fxdiagram.core.extensions.TransformExtensions.*
 import static extension de.fxdiagram.core.extensions.UriExtensions.*
 
@@ -73,7 +74,7 @@ class XRoot extends Parent implements XActivatable {
 		if(diagram.transforms.empty) {
 			centerDiagram()
 		} else {
-			diagram.transforms.forEach [diagramTransform.leftMultiply(it)]
+			diagram.transforms.forEachExt [diagramTransform.leftMultiply(it)]
 			diagramScale = sqrt(diagramTransform.mxx * diagramTransform.mxx + diagramTransform.mxy * diagramTransform.mxy)
 		}
 		diagramCanvas.style = '''
@@ -155,7 +156,7 @@ class HeadsUpDisplay extends Group {
 	new() {
 		sceneListener = [
 			property, oldVlaue, newValue |
-			children.forEach [ place ]
+			children.forEachExt [ place ]
 		]
 		sceneProperty.addListener [
 			property, oldVal, newVal |

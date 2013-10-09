@@ -6,6 +6,7 @@ import de.fxdiagram.core.XNode;
 import de.fxdiagram.core.XShape;
 import de.fxdiagram.core.auxlines.AuxiliaryLine;
 import de.fxdiagram.core.auxlines.AuxiliaryLinesCache;
+import de.fxdiagram.core.extensions.ForeachExtensions;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -48,7 +49,7 @@ public class AuxiliaryLinesSupport {
           _children.add(_createNode);
         }
       };
-      IterableExtensions.<AuxiliaryLine>forEach(lines, _function);
+      ForeachExtensions.<AuxiliaryLine>forEachExt(lines, _function);
     }
   }
   

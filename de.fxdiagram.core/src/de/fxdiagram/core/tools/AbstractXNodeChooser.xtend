@@ -25,6 +25,7 @@ import javafx.scene.input.SwipeEvent
 import static java.lang.Math.*
 
 import static extension de.fxdiagram.core.extensions.CoreExtensions.*
+import static extension de.fxdiagram.core.extensions.ForeachExtensions.*
 import static extension de.fxdiagram.core.extensions.StringExpressionExtensions.*
 import static extension javafx.util.Duration.*
 
@@ -205,7 +206,7 @@ abstract class AbstractXNodeChooser implements XDiagramTool {
 
 		if (getNodes.size != 0) 
 			interpolatedPosition = 0
-		getNodes.forEach [ node |
+		getNodes.forEachExt [ node |
 			node.onMouseClicked = [
 				switch (clickCount) {
 					case 1:
@@ -251,7 +252,7 @@ abstract class AbstractXNodeChooser implements XDiagramTool {
 
 	protected def nodeChosen(XNode choice) {
 		if (choice != null) {
-			getNodes.forEach[onMouseClicked = null]
+			getNodes.forEachExt[onMouseClicked = null]
 			group.children.remove(choice)
 			var existingChoice = diagram.nodes.findFirst[key == choice.key]
 			if(existingChoice == null) {

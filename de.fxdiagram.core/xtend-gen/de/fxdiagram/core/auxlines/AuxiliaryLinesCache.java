@@ -7,6 +7,7 @@ import de.fxdiagram.core.auxlines.AuxiliaryLine;
 import de.fxdiagram.core.auxlines.AuxiliaryLineMap;
 import de.fxdiagram.core.auxlines.NodeLine;
 import de.fxdiagram.core.extensions.CoreExtensions;
+import de.fxdiagram.core.extensions.ForeachExtensions;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -100,7 +101,7 @@ public class AuxiliaryLinesCache {
                   AuxiliaryLinesCache.this.watchNode(it);
                 }
               };
-              IterableExtensions.forEach(_addedSubList, _function);
+              ForeachExtensions.forEachExt(_addedSubList, _function);
             }
             boolean _wasRemoved = it.wasRemoved();
             if (_wasRemoved) {
@@ -110,7 +111,7 @@ public class AuxiliaryLinesCache {
                   AuxiliaryLinesCache.this.unwatchNode(it);
                 }
               };
-              IterableExtensions.forEach(_removed, _function_1);
+              ForeachExtensions.forEachExt(_removed, _function_1);
             }
           }
           boolean _next_1 = it.next();
@@ -127,7 +128,7 @@ public class AuxiliaryLinesCache {
         AuxiliaryLinesCache.this.watchNode(it);
       }
     };
-    IterableExtensions.<XNode>forEach(_nodes_1, _function_1);
+    ForeachExtensions.<XNode>forEachExt(_nodes_1, _function_1);
   }
   
   public Iterable<AuxiliaryLine> getAuxiliaryLines(final XNode node) {

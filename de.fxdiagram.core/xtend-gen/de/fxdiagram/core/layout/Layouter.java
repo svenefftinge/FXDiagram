@@ -29,6 +29,7 @@ import de.fxdiagram.core.XDiagram;
 import de.fxdiagram.core.XNode;
 import de.fxdiagram.core.XShape;
 import de.fxdiagram.core.anchors.ConnectionRouter;
+import de.fxdiagram.core.extensions.ForeachExtensions;
 import de.fxdiagram.core.layout.LayoutTransitionFactory;
 import de.fxdiagram.core.layout.LayoutTransitionStyle;
 import de.fxdiagram.core.layout.LoggingTransformationService;
@@ -199,7 +200,7 @@ public class Layouter {
         it.play();
       }
     };
-    IterableExtensions.<Animation>forEach(animations, _function);
+    ForeachExtensions.<Animation>forEachExt(animations, _function);
   }
   
   protected KNode toKRootNode(final XDiagram it, final Map<Object,KGraphElement> cache) {
@@ -221,14 +222,14 @@ public class Layouter {
           _children.add(_kNode);
         }
       };
-      IterableExtensions.<XNode>forEach(_nodes, _function);
+      ForeachExtensions.<XNode>forEachExt(_nodes, _function);
       ObservableList<XConnection> _connections = it.getConnections();
       final Procedure1<XConnection> _function_1 = new Procedure1<XConnection>() {
         public void apply(final XConnection it) {
           Layouter.this.toKEdge(it, cache);
         }
       };
-      IterableExtensions.<XConnection>forEach(_connections, _function_1);
+      ForeachExtensions.<XConnection>forEachExt(_connections, _function_1);
       _xblockexpression = (kRoot);
     }
     return _xblockexpression;

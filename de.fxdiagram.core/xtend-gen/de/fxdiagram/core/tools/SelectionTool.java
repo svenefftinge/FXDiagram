@@ -9,6 +9,7 @@ import de.fxdiagram.core.XShape;
 import de.fxdiagram.core.auxlines.AuxiliaryLinesSupport;
 import de.fxdiagram.core.behavior.MoveBehavior;
 import de.fxdiagram.core.extensions.CoreExtensions;
+import de.fxdiagram.core.extensions.ForeachExtensions;
 import de.fxdiagram.core.tools.XDiagramTool;
 import java.util.Collection;
 import java.util.Iterator;
@@ -123,7 +124,7 @@ public class SelectionTool implements XDiagramTool {
                   }
                 }
               };
-              IterableExtensions.<XShape>forEach(selection, _function_3);
+              ForeachExtensions.<XShape>forEachExt(selection, _function_3);
               MoveBehavior<? extends XShape> _moveBehavior = targetShape.getMoveBehavior();
               if (_moveBehavior!=null) {
                 _moveBehavior.mousePressed(event);

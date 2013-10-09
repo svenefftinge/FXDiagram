@@ -15,6 +15,7 @@ import javafx.geometry.Insets
 import javafx.geometry.Pos
 import javafx.geometry.Rectangle2D
 import javafx.geometry.VPos
+import javafx.scene.control.Tooltip
 import javafx.scene.image.ImageView
 import javafx.scene.layout.HBox
 import javafx.scene.layout.Pane
@@ -29,8 +30,8 @@ import javafx.scene.text.Text
 import static de.fxdiagram.examples.lcars.LcarsExtensions.*
 
 import static extension de.fxdiagram.core.extensions.DoubleExpressionExtensions.*
+import static extension de.fxdiagram.core.extensions.ForeachExtensions.*
 import static extension javafx.scene.layout.VBox.*
-import javafx.scene.control.Tooltip
 
 @Logging
 class LcarsNode extends XNode {
@@ -229,7 +230,7 @@ class LcarsNode extends XNode {
 		infoTextBox.children.clear
 		infoTextBox.children += fields
 		val timeline = new Timeline
-		fields.forEach[addAnimation(timeline)]
+		fields.forEachExt[addAnimation(timeline)]
 		timeline.play
 	}
 	
@@ -318,6 +319,6 @@ class LcarsNode extends XNode {
 	}
 	
 	override selectionFeedback(boolean isSelected) {
-		(outgoingConnections + incomingConnections).forEach[toFront]
+		(outgoingConnections + incomingConnections).forEachExt[toFront]
 	}
 }

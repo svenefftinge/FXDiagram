@@ -3,6 +3,7 @@ package de.fxdigram.lib.layout.tests;
 import de.fxdiagram.core.XDiagram;
 import de.fxdiagram.core.XNode;
 import de.fxdiagram.core.XRoot;
+import de.fxdiagram.core.extensions.ForeachExtensions;
 import de.fxdiagram.lib.simple.DiagramScaler;
 import de.fxdiagram.lib.simple.SimpleNode;
 import javafx.application.Application;
@@ -13,7 +14,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import org.eclipse.xtext.xbase.lib.InputOutput;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
@@ -93,7 +93,7 @@ public class LayoutTests extends Application {
         LayoutTests.this.printLayoutGeometry(it);
       }
     };
-    IterableExtensions.<XNode>forEach(_nodes, _function_2);
+    ForeachExtensions.<XNode>forEachExt(_nodes, _function_2);
     this.printLayoutGeometry(this.nestedDiagram);
     this.printLayoutGeometry(rectangleBorderPane);
     ObservableList<XNode> _nodes_1 = this.nestedDiagram.getNodes();
@@ -102,7 +102,7 @@ public class LayoutTests extends Application {
         LayoutTests.this.printSizes(it);
       }
     };
-    IterableExtensions.<XNode>forEach(_nodes_1, _function_3);
+    ForeachExtensions.<XNode>forEachExt(_nodes_1, _function_3);
     this.printSizes(this.nestedDiagram);
     this.printSizes(rectangleBorderPane);
     this.nestedDiagram.getNodeLayer();

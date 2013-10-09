@@ -1,6 +1,7 @@
 package de.fxdiagram.core;
 
 import com.google.common.base.Objects;
+import de.fxdiagram.core.extensions.ForeachExtensions;
 import java.util.HashMap;
 import java.util.Map;
 import javafx.beans.property.ReadOnlyDoubleProperty;
@@ -18,7 +19,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
@@ -42,7 +42,7 @@ public class HeadsUpDisplay extends Group {
             HeadsUpDisplay.this.place(it);
           }
         };
-        IterableExtensions.<Node>forEach(_children, _function);
+        ForeachExtensions.<Node>forEachExt(_children, _function);
       }
     };
     this.sceneListener = _function;

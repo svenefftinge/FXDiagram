@@ -10,6 +10,7 @@ import de.fxdiagram.core.XNode;
 import de.fxdiagram.core.XRoot;
 import de.fxdiagram.core.anchors.TriangleArrowHead;
 import de.fxdiagram.core.extensions.CoreExtensions;
+import de.fxdiagram.core.extensions.ForeachExtensions;
 import de.fxdiagram.core.tools.actions.LayoutAction;
 import de.fxdiagram.examples.lcars.LcarsExtensions;
 import de.fxdiagram.examples.lcars.LcarsNode;
@@ -134,7 +135,7 @@ public class LcarsField extends Parent {
                 it.setFill(LcarsExtensions.RED);
               }
             };
-            IterableExtensions.<Text>forEach(_allTextNodes, _function);
+            ForeachExtensions.<Text>forEachExt(_allTextNodes, _function);
             MouseButton _button = it.getButton();
             boolean _notEquals = (!Objects.equal(_button, MouseButton.PRIMARY));
             if (_notEquals) {
@@ -330,6 +331,6 @@ public class LcarsField extends Parent {
         it.setFill(LcarsExtensions.ORANGE);
       }
     };
-    IterableExtensions.<Text>forEach(_tail, _function);
+    ForeachExtensions.<Text>forEachExt(_tail, _function);
   }
 }

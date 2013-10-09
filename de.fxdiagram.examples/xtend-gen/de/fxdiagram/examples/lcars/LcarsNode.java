@@ -9,6 +9,7 @@ import de.fxdiagram.annotations.logging.Logging;
 import de.fxdiagram.core.XConnection;
 import de.fxdiagram.core.XNode;
 import de.fxdiagram.core.extensions.DoubleExpressionExtensions;
+import de.fxdiagram.core.extensions.ForeachExtensions;
 import de.fxdiagram.core.services.ImageCache;
 import de.fxdiagram.examples.lcars.LcarsExtensions;
 import de.fxdiagram.examples.lcars.LcarsField;
@@ -499,7 +500,7 @@ public class LcarsNode extends XNode {
         it.addAnimation(timeline);
       }
     };
-    IterableExtensions.<LcarsField>forEach(fields, _function);
+    ForeachExtensions.<LcarsField>forEachExt(fields, _function);
     timeline.play();
   }
   
@@ -699,7 +700,7 @@ public class LcarsNode extends XNode {
         it.toFront();
       }
     };
-    IterableExtensions.<XConnection>forEach(_plus, _function);
+    ForeachExtensions.<XConnection>forEachExt(_plus, _function);
   }
   
   private static Logger LOG = Logger.getLogger("de.fxdiagram.examples.lcars.LcarsNode");

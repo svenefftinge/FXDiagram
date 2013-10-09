@@ -15,6 +15,7 @@ import javafx.scene.paint.Paint
 import static javafx.collections.FXCollections.*
 
 import static extension de.fxdiagram.core.extensions.CoreExtensions.*
+import static extension de.fxdiagram.core.extensions.ForeachExtensions.*
 
 class XDiagram extends Group implements XActivatable {
 	
@@ -78,7 +79,7 @@ class XDiagram extends Group implements XActivatable {
 			while(change.next) {
 				if(change.wasAdded) {
 					val addedConnections = change.addedSubList.filter(XConnection)
-					addedConnections.forEach [
+					addedConnections.forEachExt [
 						addConnectionDecoration(labelProperty, labelListener) 
 						addConnectionDecoration(targetArrowHeadProperty, labelListener) 
 						addConnectionDecoration(sourceArrowHeadProperty, labelListener) 
@@ -86,7 +87,7 @@ class XDiagram extends Group implements XActivatable {
 				}
 				if(change.wasRemoved) {
 					val removedConnections = change.removed.filter(XConnection)
-					removedConnections.forEach [
+					removedConnections.forEachExt [
 						removeConnectionDecoration(labelProperty, labelListener) 
 						removeConnectionDecoration(targetArrowHeadProperty, labelListener) 
 						removeConnectionDecoration(sourceArrowHeadProperty, labelListener) 
@@ -95,14 +96,14 @@ class XDiagram extends Group implements XActivatable {
 			}
 		]
 		connectionLayer.children.addListener(listChangeListener)
-		(nodes + connections + buttons).forEach[activate]
+		(nodes + connections + buttons).forEachExt[activate]
 		auxiliaryLinesSupport = new AuxiliaryLinesSupport(this)
 		contentsInitializer?.apply(this)
 	}
 	
 	protected def addConnectionDecoration(javafx.beans.property.Property<? extends Node> property, 
 		ChangeListener<? super Node> listener) {
-		if(property.value != null)
+		if(property.value != null && property.value.parent != null)
 			connectionLayer.children += property.value
 		property.addListener(listener)
 	} 
@@ -159,14 +160,14 @@ class XDiagramChildrenListener<T extends Node & XActivatable> implements ListCha
 	override onChanged(ListChangeListener.Change<? extends T> change) {
 		while(change.next) {
 			if(change.wasAdded)
-				change.addedSubList.forEach [
+				change.addedSubList.forEachExt [
 					layer.children += it
 					if(diagram.isActive)
 						// Xtend bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=413708
 						(it as XActivatable).activate
 				]
 			if(change.wasRemoved) 
-				change.removed.forEach [
+				change.removed.forEachExt [
 					layer.children -= it
 				]
 		}

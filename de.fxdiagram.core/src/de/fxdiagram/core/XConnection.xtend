@@ -24,6 +24,7 @@ import static de.fxdiagram.core.extensions.Point2DExtensions.*
 
 import static extension de.fxdiagram.core.extensions.BezierExtensions.*
 import static extension de.fxdiagram.core.extensions.CoreExtensions.*
+import static extension de.fxdiagram.core.extensions.ForeachExtensions.*
 
 @Logging
 class XConnection extends XShape {
@@ -71,14 +72,14 @@ class XConnection extends XShape {
 			val points = list
 			updateShapes
 			while(next) 
-				addedSubList.forEach[
+				addedSubList.forEachExt[
 					val index = points.indexOf(it)					
 					if(index != 0 && index != points.size)
 						activate
 					layoutXProperty.addListener(controlPointListener)
 					layoutYProperty.addListener(controlPointListener)
 				]
-				removed.forEach [
+				removed.forEachExt [
 					layoutXProperty.removeListener(controlPointListener)
 					layoutYProperty.removeListener(controlPointListener)
 				]
@@ -184,7 +185,7 @@ class XConnection extends XShape {
 		shapeGroup.children.setAll(shapes)
 		val strokeBoundsInRoot = source.localToRootDiagram(new BoundingBox(0, 0, this.strokeWidth, this.strokeWidth))
 		val strokeInRoot = 0.5 * (strokeBoundsInRoot.width + strokeBoundsInRoot.height) 
-		shapes.forEach [
+		shapes.forEachExt [
 			stroke = this.stroke
 			strokeLineCap = StrokeLineCap.ROUND
 			strokeWidth = strokeInRoot

@@ -3,6 +3,7 @@ package de.fxdiagram.examples.java;
 import com.google.common.base.Objects;
 import de.fxdiagram.core.XNode;
 import de.fxdiagram.core.anchors.Anchors;
+import de.fxdiagram.core.extensions.ForeachExtensions;
 import de.fxdiagram.examples.java.JavaTypeModel;
 import de.fxdiagram.examples.java.JavaTypeRapidButtonBehavior;
 import de.fxdiagram.examples.java.Property;
@@ -158,7 +159,7 @@ public class JavaTypeNode extends XNode {
           _children.add(_doubleArrow);
         }
       };
-      IterableExtensions.<Property>forEach(_limit, _function);
+      ForeachExtensions.<Property>forEachExt(_limit, _function);
       List<Constructor<? extends Object>> _constructors = this.model.getConstructors();
       final Procedure1<Constructor<? extends Object>> _function_1 = new Procedure1<Constructor<? extends Object>>() {
         public void apply(final Constructor<? extends Object> constructor) {
@@ -188,7 +189,7 @@ public class JavaTypeNode extends XNode {
           _children.add(_doubleArrow);
         }
       };
-      IterableExtensions.<Constructor<? extends Object>>forEach(_constructors, _function_1);
+      ForeachExtensions.<Constructor<? extends Object>>forEachExt(_constructors, _function_1);
       List<Method> _operations = this.model.getOperations();
       List<Method> _limit_1 = this.<Method>limit(_operations);
       final Procedure1<Method> _function_2 = new Procedure1<Method>() {
@@ -222,7 +223,7 @@ public class JavaTypeNode extends XNode {
           _children.add(_doubleArrow);
         }
       };
-      IterableExtensions.<Method>forEach(_limit_1, _function_2);
+      ForeachExtensions.<Method>forEachExt(_limit_1, _function_2);
     }
   }
   

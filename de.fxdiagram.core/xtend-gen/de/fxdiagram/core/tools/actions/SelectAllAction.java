@@ -3,8 +3,8 @@ package de.fxdiagram.core.tools.actions;
 import de.fxdiagram.core.XDiagram;
 import de.fxdiagram.core.XRoot;
 import de.fxdiagram.core.XShape;
+import de.fxdiagram.core.extensions.ForeachExtensions;
 import de.fxdiagram.core.tools.actions.DiagramAction;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
@@ -20,6 +20,6 @@ public class SelectAllAction implements DiagramAction {
         }
       }
     };
-    IterableExtensions.<XShape>forEach(_allShapes, _function);
+    ForeachExtensions.<XShape>forEachExt(_allShapes, _function);
   }
 }
